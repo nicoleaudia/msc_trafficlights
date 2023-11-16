@@ -17,7 +17,7 @@ int main() {
 
 
 	/* (b) create a pair of traffic lights with delays 15 minutes and 5
-	       minutes respectively:                                          */
+	   minutes respectively: */                                          
 	cout << "\nA pair T1 and T2 of (slow) collaborating lights is set up:\n";
 	char T1Name[] = "T1 (North South)";
 	char T2Name[] = "T2 (East West)";
@@ -34,8 +34,8 @@ int main() {
 	LightT2.carWantsToCross();							// event (f) completed
 
 
-	/* (g) create another pair of traffic lights with extra long delays of
-	 6hrs, 15mins, 44secs and 14hrs, 5mins, 57secs respectively:          */
+	/*(g) create another pair of traffic lights with extra long delays of
+	  6hrs, 15mins, 44secs and 14hrs, 5mins, 57secs respectively: */         
 	cout << "\nA new pair T3 and T4 of (very slow!) collaborating lights is now set up:\n";
 	char T3Name[] = "T3 (North South)";
 	char T4Name[] = "T4 (East West)";
@@ -45,7 +45,7 @@ int main() {
 	TrafficLight LightT4(delayT4, T4Name, LightT3);		// event (g) completed
 
 
-	/* (h)-(m) continue the simulation with 6 more car crossings: */
+	/*(h)-(m) continue the simulation with 6 more car crossings: */
 	LightT3.carWantsToCross();							// event (h) completed
 	LightT3.carWantsToCross();							// event (i) completed
 	LightT4.carWantsToCross();							// event (j) completed

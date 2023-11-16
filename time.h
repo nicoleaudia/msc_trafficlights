@@ -7,11 +7,11 @@
 
 /*********************** Time Class ***************************/
 
-class Time {
+class Time { //declaration
 
 	public:
-
-		Time();
+  //both are constructors. first one is default constructor
+		Time(); 
 
 		Time(int hours, int mins, int secs);
 		

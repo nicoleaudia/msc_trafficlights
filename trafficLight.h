@@ -7,23 +7,34 @@
 
 /*********************** Class TrafficLight ***************************/
 
+//declare enum data type Color
+enum Color { red, yellow, green };
+
+
 class TrafficLight {
 
-	public:
+public:
 	
-		TrafficLight(Time,char*);
-		TrafficLight(Time,char*,TrafficLight&); 
+  TrafficLight(Time delay_time,char* name);
+  TrafficLight(Time,char*,TrafficLight&); 
 
-		void carWantsToCross();
+  void carWantsToCross();
 
-		static void setTheTime(Time&);
+  static void setTheTime(Time&);
 
-		friend std::ostream& operator << (std::ostream&, TrafficLight*);
+  friend std::ostream& operator << (std::ostream&, TrafficLight*);
 
-	private:
+private: //I added things here. TypeName variableName;
+  
+  Time delay_time;
+  char* name;
+  TrafficLight* partner;
+  Color light_color;
+  
+  static Time global_clock;
 
-		/* add members and operations to complete the class yourself */
-
+  void request_red();
+  void request_green();
 };
 
 #endif
