@@ -86,14 +86,15 @@ void TrafficLight::request_red(){
   if (this->light_color == green){
     global_clock.add(this->delay_time);
     this->light_color = yellow;
+    cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
     partner->request_green();
   }
   else { //partner is yellow
     global_clock.add(this->delay_time);
     this->light_color = red;
+    cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
     partner->request_green();
   }
-  cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
 }
 
 
@@ -101,11 +102,12 @@ void TrafficLight::request_green(){
   if (this->light_color == red){
     global_clock.add(this->delay_time);
     this->light_color = yellow;
+    cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
     partner->request_red();
   }
   else { //this is yellow
     global_clock.add(this->delay_time);
     this->light_color = green;
+    cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
   }
-  cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
 }
