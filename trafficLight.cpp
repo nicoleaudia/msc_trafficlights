@@ -44,7 +44,7 @@ TrafficLight::TrafficLight(/*TrafficLight *this,*/ Time delay_time, char* name, 
 void TrafficLight::carWantsToCross(){
 
   //print intro message
-  cout << endl << "*** at " << global_clock << " a car wants to cross light " << this->name << ", with colour: " << this->light_color << endl;
+  cout << endl << "***  at " << global_clock << " a car wants to cross light " << this->name << ", with colour: " << this->light_color << endl;
 
   if (this->light_color == red){
     
@@ -53,12 +53,12 @@ void TrafficLight::carWantsToCross(){
       //add time to global clock and change to yellow
       global_clock.add(delay_time);
       light_color = yellow;
-      cout << "    at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
+      cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
 
       //add time to global clock and change to green
       global_clock.add(delay_time);
       light_color = green;
-      cout << "    at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl; 
+      cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl; 
     }
     else { // (partner->light_color == green){ //arrow means dereferencing and asking for attribute
       partner->request_red();
@@ -86,15 +86,14 @@ void TrafficLight::request_red(){
   if (this->light_color == green){
     global_clock.add(this->delay_time);
     this->light_color = yellow;
-    cout << "    at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
     partner->request_green();
   }
   else { //partner is yellow
     global_clock.add(this->delay_time);
     this->light_color = red;
-    cout << "    at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
     partner->request_green();
   }
+  cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
 }
 
 
@@ -102,13 +101,11 @@ void TrafficLight::request_green(){
   if (this->light_color == red){
     global_clock.add(this->delay_time);
     this->light_color = yellow;
-    cout << "    at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
     partner->request_red();
   }
-
   else { //this is yellow
     global_clock.add(this->delay_time);
     this->light_color = green;
-    cout << "    at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;    
   }
+  cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
 }
