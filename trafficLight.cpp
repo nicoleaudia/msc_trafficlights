@@ -4,9 +4,9 @@
 
 using namespace std;
 
-//overloading the operator for the enum Color so cout outputs strings instead of integers
-ostream &operator<<(ostream &out, const Color &light_color) {
-  switch(light_color){
+//overloads the output operator to output a string instead of an integer value for light_colour
+ostream &operator<<(ostream &out, const Colour &light_colour) {
+  switch(light_colour){
   case red:
     out << "red"; break;
   case yellow:
@@ -18,96 +18,114 @@ ostream &operator<<(ostream &out, const Color &light_color) {
 }
 
 
-//definition calling default constructor
 Time TrafficLight::global_clock;
 
-//first one is TrafficLight namespace(class-specific namespace), second one is constructor
-TrafficLight::TrafficLight(/*TrafficLight *this,*/ Time delay_time, char* name){
+
+TrafficLight::TrafficLight(Time delay_time, char* name){
   this->delay_time = delay_time;
   this->name = name;
-  this->partner = NULL; //need to set NULL so doesn't pick junk value as attribute
+  this->partner = NULL; 
 
-  light_color = red; 
+  light_colour = red; 
 }
 
-TrafficLight::TrafficLight(/*TrafficLight *this,*/ Time delay_time, char* name, TrafficLight& partner){
+
+TrafficLight::TrafficLight(Time delay_time, char* name, TrafficLight& partner){
   this->delay_time = delay_time;
   this->name = name;
   this->partner = &partner;
 
-  //sets current object to the partner of its partner
+  //sets this object to be the partner of its partner
   this->partner->partner = this;
   
-  light_color = red;
+  light_colour = red;
 }
+
 
 void TrafficLight::carWantsToCross(){
 
-  //print intro message
-  cout << endl << "***  at " << global_clock << " a car wants to cross light " << this->name << ", with colour: " << this->light_color << endl;
+  //prints initial message when car wants to cross
+  cout << endl << "***  at " << global_clock << " a car wants to cross light " << this->name << ", with colour: " << this->light_colour << endl;
 
-  if (this->light_color == red){
+  if (this->light_colour == red){
     
-    if (partner->light_color == red){
+    if (partner->light_colour == red){
  
-      //add time to global clock and change to yellow
+      //adds time to global clock and changes light colour to yellow
       global_clock.add(delay_time);
-      light_color = yellow;
-      cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
+      light_colour = yellow;
+      print_status_message();
 
-      //add time to global clock and change to green
+      //adds time to global clock and changes light colour to green
       global_clock.add(delay_time);
-      light_color = green;
-      cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl; 
+      light_colour = green;
+      print_status_message();
     }
-    else { // (partner->light_color == green){ //arrow means dereferencing and asking for attribute
-      partner->request_red();
-      //(*partner).request_red();
-      //this->request_red();
-      //      (*this).request_red();
+    
+    else {
+      
+    partner->request_red();
     }
   }
 }
 
-//bc setTheTime is a static operation, it can only be used at the beginning of the program before any TrafficLight objects are created
+
 void TrafficLight::setTheTime(Time& global_clock){
   TrafficLight::global_clock = global_clock;
 }
 
-//infinite loop currently
+
 ostream& operator << (ostream& os, TrafficLight* trafficLight){
   os << trafficLight->name;
   return os;
 }
 
 
-//This method is private within the TrafficLight class and assumes it will only be called if the partner's light is either green or yellow
+/* request_red method is private within the TrafficLight class and assumes it will only be called
+  if the light is either green or yellow */
 void TrafficLight::request_red(){
-  if (this->light_color == green){
+  if (this->light_colour == green){
+
+    //adds time to global clock, changes light colour to yellow, and calls request_green function for partner
     global_clock.add(this->delay_time);
-    this->light_color = yellow;
-    cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
+    this->light_colour = yellow;
+    print_status_message();
     partner->request_green();
   }
-  else { //partner is yellow
+  
+  else {
+    
+    //adds time to global clock, changes light colour to green, and calls request_green function for partner
     global_clock.add(this->delay_time);
-    this->light_color = red;
-    cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
+    this->light_colour = red;
+    print_status_message();
     partner->request_green();
   }
 }
 
 
+/* request_green method is private within the TrafficLight class and assumes it will only be called 
+   if the light is either red or yellow */
 void TrafficLight::request_green(){
-  if (this->light_color == red){
+  if (this->light_colour == red){
+
+    //adds time to global clock, changes light colour to yellow, and calls request_red function for partner
     global_clock.add(this->delay_time);
-    this->light_color = yellow;
-    cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
+    this->light_colour = yellow;
+    print_status_message();
     partner->request_red();
   }
-  else { //this is yellow
+  
+  else {
+    
+    //adds time to global clock and changes light colour to green
     global_clock.add(this->delay_time);
-    this->light_color = green;
-    cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_color << endl;
+    this->light_colour = green;
+    print_status_message();
   }
+}
+
+
+void TrafficLight::print_status_message(){
+  cout << "     at " << global_clock << " " << this->name << " changes colour to " << this->light_colour << endl;
 }
