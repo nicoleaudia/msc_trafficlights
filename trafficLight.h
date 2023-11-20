@@ -60,7 +60,7 @@ public:
   static void setTheTime(Time& global_clock);
   
 
-  friend std::ostream& operator << (std::ostream&, TrafficLight*);
+  friend std::ostream& operator << (std::ostream&, const TrafficLight*);
 
 private:
 

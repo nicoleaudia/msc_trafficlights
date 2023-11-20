@@ -75,7 +75,7 @@ void TrafficLight::setTheTime(Time& global_clock){
 }
 
 
-ostream& operator << (ostream& os, TrafficLight* trafficLight){
+ostream& operator << (ostream& os, const TrafficLight* trafficLight){
   os << trafficLight->name;
   return os;
 }

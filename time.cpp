@@ -24,7 +24,7 @@ void Time::add(Time &anotherTime) {
 
 
 //friend operator that overloads << operator to output in the format "hours : minutes : seconds"
-ostream& operator << (ostream& os, Time& time){
+ostream& operator << (ostream& os, const Time& time){
   os << time.theHour << ':' << time.theMins << ':' << time.theSecs; 
   return os;
 }

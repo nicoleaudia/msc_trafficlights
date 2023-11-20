@@ -41,7 +41,7 @@ class Time {
   
                 /* Purpose: Delcares the << operator as a friend of the Time function,
 		 * granting it access to the members of Time. */
-		friend std::ostream& operator << (std::ostream&, Time&);
+		friend std::ostream& operator << (std::ostream&, const Time&);
 
 	private:
 
