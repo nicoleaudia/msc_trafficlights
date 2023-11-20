@@ -12,6 +12,8 @@
  * red (0), yellow (1), and green (2). */
 enum Colour { red, yellow, green };
 
+/* Purpose: Overloads the output operator to output a string instead of an integer value for Colour. */
+std::ostream& operator << (std::ostream&, const Colour&);
 
 /* Purpose: Defines class that represents traffic lights. */
 class TrafficLight {
